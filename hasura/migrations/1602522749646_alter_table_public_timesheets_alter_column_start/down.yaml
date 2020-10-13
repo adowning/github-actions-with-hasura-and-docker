@@ -1,0 +1,5 @@
+- args:
+    cascade: false
+    read_only: false
+    sql: ALTER TABLE ONLY "public"."timesheets" ALTER COLUMN "start" DROP DEFAULT;
+  type: run_sql

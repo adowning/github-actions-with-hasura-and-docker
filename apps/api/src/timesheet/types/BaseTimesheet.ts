@@ -1,9 +1,9 @@
 import { Field, ObjectType, registerEnumType } from '@nestjs/graphql';
-import { UserQuery } from '../../../hasura-graphql';
-import { Timesheet } from '../../timesheet/types';
+import { TimesheetQuery } from '../../../hasura-graphql';
+import { User } from '../../user/types';
 
 @ObjectType()
-export class BaseUser {
+export class BaseTimesheet {
   @Field()
   id: string;
 
@@ -14,10 +14,16 @@ export class BaseUser {
   updated_at: string;
 
   @Field()
-  email: string;
+  user: User;
 
   @Field()
-  activeTimesheetId: string;
+  start: Date;
+
+  @Field()
+  end: Date;
+
+  @Field()
+  isActive: Boolean;
 
   // @Field(type => Role)
   // role: Role;
@@ -30,5 +36,5 @@ export class BaseUser {
 
 // registerEnumType(Role, {
 //   name: 'Role',
-//   description: 'User role'
+//   description: 'Timesheet role'
 // });

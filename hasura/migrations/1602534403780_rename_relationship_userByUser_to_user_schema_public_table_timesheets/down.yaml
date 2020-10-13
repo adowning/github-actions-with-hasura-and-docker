@@ -1,0 +1,7 @@
+- args:
+    name: user
+    new_name: userByUser
+    table:
+      name: timesheets
+      schema: public
+  type: rename_relationship

@@ -1,0 +1,13 @@
+- args:
+    name: activeTimesheet
+    table:
+      name: users
+      schema: public
+    using:
+      manual_configuration:
+        column_mapping:
+          activeTimesheetId: id
+        remote_table:
+          name: timesheets
+          schema: public
+  type: create_object_relationship

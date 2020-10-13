@@ -1,0 +1,12 @@
+- args:
+    relationship: timesheets
+    table:
+      name: users
+      schema: public
+  type: drop_relationship
+- args:
+    relationship: userByUser
+    table:
+      name: timesheets
+      schema: public
+  type: drop_relationship

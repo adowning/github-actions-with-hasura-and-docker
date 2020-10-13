@@ -8,6 +8,11 @@ type Auth {
   user: User!
 }
 
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
 input LoginInput {
   email: String!
   password: String!
@@ -16,10 +21,12 @@ input LoginInput {
 type Mutation {
   signup(data: SignupInput!): Auth!
   login(data: LoginInput!): Auth!
+  punchCurrentUserClock: Timesheet!
 }
 
 type Query {
   me: User!
+  myTimesheets: Timesheet!
 }
 
 input SignupInput {
@@ -27,9 +34,20 @@ input SignupInput {
   password: String!
 }
 
+type Timesheet {
+  id: String!
+  created_at: String!
+  updated_at: String!
+  user: User!
+  start: DateTime!
+  end: DateTime!
+  isActive: Boolean!
+}
+
 type User {
   id: String!
   created_at: String!
   updated_at: String!
   email: String!
+  activeTimesheetId: String!
 }

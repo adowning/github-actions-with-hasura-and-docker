@@ -1,0 +1,6 @@
+- args:
+    cascade: false
+    read_only: false
+    sql: ALTER TABLE ONLY "public"."users" ALTER COLUMN "isClockedIn" SET DEFAULT
+      false;
+  type: run_sql

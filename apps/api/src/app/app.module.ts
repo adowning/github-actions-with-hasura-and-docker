@@ -6,6 +6,7 @@ import { AuthModule } from '../auth/auth.module';
 import { UserModule } from '../user/user.module';
 import { GraphQLModule } from '@nestjs/graphql';
 import { join } from 'path';
+import { TimesheetModule } from '../timesheet/timesheet.module';
 
 @Module({
   imports: [
@@ -26,7 +27,8 @@ import { join } from 'path';
       }
     }),
     AuthModule,
-    UserModule
+    UserModule,
+    TimesheetModule
   ],
   controllers: [AppController],
   providers: [AppService]

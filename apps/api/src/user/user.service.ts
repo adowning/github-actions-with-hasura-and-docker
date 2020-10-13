@@ -1,4 +1,6 @@
 import { Injectable } from '@nestjs/common';
+import { UpdateUserMutationVariables } from 'apps/api/hasura-graphql';
+import { isCatchClause } from 'typescript';
 import { GraphqlService } from '../graphql/graphql.service';
 
 @Injectable()
@@ -26,5 +28,16 @@ export class UserService {
       .insert_users.returning[0];
 
     return createdUser;
+  }
+
+  public async updateUser(updateUserData: UpdateUserMutationVariables) {
+    // try {
+    const isClockedIn = (await this.gqlService.sdk.UpdateUser(updateUserData))
+      .update_users_by_pk;
+    return isClockedIn;
+
+    // } catch (e) {
+
+    // }
   }
 }

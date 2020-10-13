@@ -1,0 +1,5 @@
+- args:
+    cascade: false
+    read_only: false
+    sql: alter table "public"."timesheets" rename column "user" to "userId";
+  type: run_sql

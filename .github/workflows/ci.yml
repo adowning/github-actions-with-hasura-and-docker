@@ -30,33 +30,33 @@ jobs:
       - name: Teardown Stack
         if: always()
         run: yarn down:ci
-  Build-and-Test-Self-Hosted:
-    runs-on: self-hosted
-    steps:
-      - uses: actions/checkout@v2
-      - uses: bahmutov/npm-install@v1
-      - name: Build the stack
-        env: # Set env using GitHub Secrets
-          HASURA_GRAPHQL_DATABASE_URL: ${{ secrets.HASURA_GRAPHQL_DATABASE_URL }}
-          HASURA_GRAPHQL_ENABLE_CONSOLE: ${{ secrets.HASURA_GRAPHQL_ENABLE_CONSOLE }}
-          HASURA_GRAPHQL_ENABLED_LOG_TYPES: ${{ secrets.HASURA_GRAPHQL_ENABLED_LOG_TYPES }}
-          HASURA_GRAPHQL_MIGRATIONS_DIR: ${{ secrets.HASURA_GRAPHQL_MIGRATIONS_DIR }}
-          HASURA_ENDPOINT: ${{ secrets.HASURA_ENDPOINT }}
-          DB_USER: ${{ secrets.DB_USER }}
-          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
-        run: yarn up:ci
-      - name: api Passes Lint Check
-        run: yarn lint api
-      # - name: web-ui Passes Lint Check
-      #   run: yarn lint web-ui
-      - name: Run UI Tests
-        run: yarn test web-ui
-      - name: Migrate Hasura Schema
-        run: yarn hasura:migrate:ci
-      - name: Test api
-        env:
-          HASURA_ENDPOINT: ${{ secrets.HASURA_ENDPOINT }}
-        run: yarn test api --verbose
-      - name: Teardown Stack
-        if: always()
-        run: yarn down:ci
+  # Build-and-Test-Self-Hosted:
+  #   runs-on: self-hosted
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - uses: bahmutov/npm-install@v1
+  #     - name: Build the stack
+  #       env: # Set env using GitHub Secrets
+  #         HASURA_GRAPHQL_DATABASE_URL: ${{ secrets.HASURA_GRAPHQL_DATABASE_URL }}
+  #         HASURA_GRAPHQL_ENABLE_CONSOLE: ${{ secrets.HASURA_GRAPHQL_ENABLE_CONSOLE }}
+  #         HASURA_GRAPHQL_ENABLED_LOG_TYPES: ${{ secrets.HASURA_GRAPHQL_ENABLED_LOG_TYPES }}
+  #         HASURA_GRAPHQL_MIGRATIONS_DIR: ${{ secrets.HASURA_GRAPHQL_MIGRATIONS_DIR }}
+  #         HASURA_ENDPOINT: ${{ secrets.HASURA_ENDPOINT }}
+  #         DB_USER: ${{ secrets.DB_USER }}
+  #         DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+  #       run: yarn up:ci
+  #     - name: api Passes Lint Check
+  #       run: yarn lint api
+  #     # - name: web-ui Passes Lint Check
+  #     #   run: yarn lint web-ui
+  #     - name: Run UI Tests
+  #       run: yarn test web-ui
+  #     - name: Migrate Hasura Schema
+  #       run: yarn hasura:migrate:ci
+  #     - name: Test api
+  #       env:
+  #         HASURA_ENDPOINT: ${{ secrets.HASURA_ENDPOINT }}
+  #       run: yarn test api --verbose
+  #     - name: Teardown Stack
+  #       if: always()
+  #       run: yarn down:ci
