@@ -1,6 +1,4 @@
-import { Field, ObjectType, registerEnumType } from '@nestjs/graphql';
-import { UserQuery } from '../../../hasura-graphql';
-import { Timesheet } from '../../timesheet/types';
+import { Field, ObjectType } from '@nestjs/graphql';
 
 @ObjectType()
 export class BaseUser {

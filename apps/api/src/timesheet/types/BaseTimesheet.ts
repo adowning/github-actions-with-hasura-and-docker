@@ -1,5 +1,4 @@
-import { Field, ObjectType, registerEnumType } from '@nestjs/graphql';
-import { TimesheetQuery } from '../../../hasura-graphql';
+import { Field, ObjectType } from '@nestjs/graphql';
 import { User } from '../../user/types';
 
 @ObjectType()
@@ -23,7 +22,7 @@ export class BaseTimesheet {
   end: Date;
 
   @Field()
-  isActive: Boolean;
+  isActive: boolean;
 
   // @Field(type => Role)
   // role: Role;

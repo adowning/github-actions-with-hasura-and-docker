@@ -1,6 +1,6 @@
+/* eslint-disable @nrwl/nx/enforce-module-boundaries */
 import { Injectable } from '@nestjs/common';
 import { UpdateUserMutationVariables } from 'apps/api/hasura-graphql';
-import { isCatchClause } from 'typescript';
 import { GraphqlService } from '../graphql/graphql.service';
 
 @Injectable()

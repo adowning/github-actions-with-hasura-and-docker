@@ -1,12 +1,11 @@
-import { Injectable, UnprocessableEntityException } from '@nestjs/common';
+/* eslint-disable @nrwl/nx/enforce-module-boundaries */
+import { Injectable } from '@nestjs/common';
 import {
   UpdateTimesheetMutationVariables,
   UpdateUserMutationVariables
 } from 'apps/api/hasura-graphql';
 import { GraphqlService } from '../graphql/graphql.service';
 import { UserService } from '../user/user.service';
-import { CreateTimesheetInput } from './dto/createTimesheet_input';
-import { Timesheet } from './types';
 
 @Injectable()
 export class TimesheetService {
