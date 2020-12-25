@@ -1,0 +1,30 @@
+version: '2'
+services:
+  graphql-engine:
+    image: hasura/graphql-engine:v1.3.3
+    ports:
+      - '8083:8080'
+    depends_on:
+      - 'db'
+    restart: always
+    env_file: .env
+    environment:
+      HASURA_GRAPHQL_DATABASE_URL: ${HASURA_GRAPHQL_DATABASE_URL}
+      HASURA_GRAPHQL_ENABLE_CONSOLE: '${HASURA_GRAPHQL_ENABLE_CONSOLE}' # set to "false" to disable console
+      HASURA_GRAPHQL_ENABLED_LOG_TYPES: ${HASURA_GRAPHQL_ENABLED_LOG_TYPES}
+      HASURA_GRAPHQL_MIGRATIONS_DIR: ${HASURA_GRAPHQL_MIGRATIONS_DIR}
+      ## uncomment next line to set an admin secret
+      HASURA_GRAPHQL_ADMIN_SECRET: ${HASURA_GRAPHQL_SECRET}
+  pgadmin:
+    image: dpage/pgadmin4:4.18
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
+      PGADMIN_LISTEN_PORT: ${PGADMIN_LISTEN_PORT}
+    ports:
+      - "8087:80"
+    volumes:
+      - pgadmin:/var/lib/pgadmin
+volumes:
+  pgadmin:
