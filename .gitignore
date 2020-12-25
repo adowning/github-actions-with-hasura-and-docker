@@ -42,3 +42,4 @@ testem.log
 Thumbs.db
 
 apps/api/tsconfig.nx-tmp
+/pgdata

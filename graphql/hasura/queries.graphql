@@ -1,10 +1,28 @@
-query User($userId: uuid!) {
+query User($userId: String!) {
   users_by_pk(id: $userId) {
     email
     id
-    activeTimesheetId
+    active_timesheet_id
     created_at
     updated_at
+  }
+}
+
+query Account($accountId: numeric!) {
+  accounts_by_pk(id: $accountId) {
+    account_name
+    search_address
+    email
+    phone_list
+  }
+}
+
+query AllAccounts {
+  accounts {
+    account_name
+    search_address
+    email
+    phone_list
   }
 }
 
@@ -12,30 +30,30 @@ query UserByEmail($email: String!) {
   users(distinct_on: email, limit: 1, where: { email: { _eq: $email } }) {
     id
     created_at
-    activeTimesheetId
+    active_timesheet_id
     email
     password
     updated_at
   }
 }
 
-query Timesheet($timesheetId: uuid!) {
+query Timesheet($timesheetId: String!) {
   timesheets_by_pk(id: $timesheetId) {
-    user {
-      email
-      id
-    }
+    # user {
+    #   email
+    #   id
+    # }
     created_at
     updated_at
   }
 }
 
-query TimesheetsByUserId($userId: uuid!) {
-  timesheets(where: { userId: { _eq: $userId } }) {
-    user {
-      email
-      id
-    }
+query TimesheetsByUserId($users_id: String!) {
+  timesheets(where: { users_id: { _eq: $users_id } }) {
+    # user {
+    #   email
+    #   id
+    # }
     id
     start
     end
@@ -44,4 +62,3 @@ query TimesheetsByUserId($userId: uuid!) {
     updated_at
   }
 }
-

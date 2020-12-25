@@ -1,0 +1,41 @@
+- table:
+    schema: public
+    name: account_test
+  array_relationships:
+  - name: order_testsByAccount_testId
+    using:
+      foreign_key_constraint_on:
+        column: account_test_id
+        table:
+          schema: public
+          name: order_test
+- table:
+    schema: public
+    name: call_test
+- table:
+    schema: public
+    name: employee_test
+- table:
+    schema: public
+    name: order_test
+  object_relationships:
+  - name: account_testByAccount_testId
+    using:
+      foreign_key_constraint_on: account_test_id
+- table:
+    schema: public
+    name: timesheet
+  event_triggers:
+  - name: timesheet-created
+    definition:
+      enable_manual: false
+      insert:
+        columns: '*'
+    retry_conf:
+      num_retries: 3
+      interval_sec: 15
+      timeout_sec: 100
+    webhook_from_env: NESTJS_EVENT_WEBHOOK_ENDPOINT
+    headers:
+    - name: asdfasfd
+      value_from_env: HASURA_NESTJS_WEBHOOK_SECRET_HEADER_VALUE

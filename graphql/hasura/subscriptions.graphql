@@ -1,0 +1,67 @@
+subscription UserSubscribe($users_id: String!) {
+  users_by_pk(id: $users_id) {
+    email
+    id
+    active_timesheet_id
+    created_at
+    updated_at
+  }
+}
+
+subscription userLoggedIn($users_id: String!) {
+  users_by_pk(id: $users_id) {
+    email
+    id
+    active_timesheet_id
+    created_at
+    updated_at
+  }
+}
+
+subscription UserByEmailSubscribe($email: String!) {
+  users(distinct_on: email, limit: 1, where: { email: { _eq: $email } }) {
+    id
+    created_at
+    active_timesheet_id
+    email
+    password
+    updated_at
+  }
+}
+
+subscription UsersSubscribe {
+  users {
+    id
+    created_at
+    active_timesheet_id
+    email
+    password
+    updated_at
+  }
+}
+
+subscription TimesheetSubscribe($timesheetId: String!) {
+  timesheets_by_pk(id: $timesheetId) {
+    # user {
+    #   email
+    #   id
+    # }
+    created_at
+    updated_at
+  }
+}
+
+subscription TimesheetsByusers_idSubscribe($users_id: String!) {
+  timesheets(where: { users_id: { _eq: $users_id } }) {
+    # user {
+    #   email
+    #   id
+    # }
+    id
+    start
+    end
+    updated_at
+    created_at
+    updated_at
+  }
+}

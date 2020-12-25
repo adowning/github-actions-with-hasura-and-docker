@@ -12,17 +12,7 @@ export class BaseTimesheet {
   @Field()
   updated_at: string;
 
-  @Field()
-  user: User;
 
-  @Field()
-  start: Date;
-
-  @Field()
-  end: Date;
-
-  @Field()
-  isActive: boolean;
 
   // @Field(type => Role)
   // role: Role;

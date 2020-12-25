@@ -1,0 +1,26 @@
+version: 2
+tables:
+- table:
+    schema: public
+    name: account_test
+  array_relationships:
+  - name: order_testsByAccount_testId
+    using:
+      foreign_key_constraint_on:
+        column: account_test_id
+        table:
+          schema: public
+          name: order_test
+- table:
+    schema: public
+    name: call_test
+- table:
+    schema: public
+    name: employee_test
+- table:
+    schema: public
+    name: order_test
+  object_relationships:
+  - name: account_testByAccount_testId
+    using:
+      foreign_key_constraint_on: account_test_id

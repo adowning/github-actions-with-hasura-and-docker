@@ -9,6 +9,7 @@ import { AuthService } from './auth.service';
 import { authConstants } from './constants';
 import { JwtStrategy } from './jwt.strategy';
 import { PasswordService } from './password.service';
+import { PubSub } from 'graphql-subscriptions'
 
 @Module({
   imports: [
@@ -25,8 +26,12 @@ import { PasswordService } from './password.service';
     AuthResolver,
     JwtStrategy,
     GqlAuthGuard,
-    PasswordService
+    PasswordService,
+    {
+      provide: 'PUB_SUB',
+      useValue: new PubSub(),
+    }
   ],
   exports: [AuthService, GqlAuthGuard, AuthResolver]
 })
-export class AuthModule {}
+export class AuthModule { }

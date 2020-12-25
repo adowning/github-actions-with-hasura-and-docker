@@ -4,7 +4,7 @@ import { InputType, Field } from '@nestjs/graphql';
 export class CreateTimesheetInput {
   @Field()
   @IsNotEmpty()
-  userId: string;
+  users_id: string;
 
   // @Field()
   // @IsNotEmpty()

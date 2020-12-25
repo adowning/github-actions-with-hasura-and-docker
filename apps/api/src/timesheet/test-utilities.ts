@@ -6,7 +6,7 @@ import { PasswordService } from '../auth/password.service';
 export const createTimesheetMutationVariableFactory = (
   timesheetData: Partial<CreateTimesheetMutationVariables> = {}
 ) => ({
-  userId: timesheetData.userId || (faker.internet.userId() as string)
+  users_id: timesheetData.users_id || (faker.internet.users_id() as string)
   // role: timesheetData.role || 'ADMIN'
 });
 

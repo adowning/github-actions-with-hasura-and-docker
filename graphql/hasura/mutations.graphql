@@ -1,8 +1,3 @@
-
-
-
-
-
 mutation CreateUser($email: String!, $password: String!) {
   insert_users(objects: { email: $email, password: $password }) {
     affected_rows
@@ -13,17 +8,22 @@ mutation CreateUser($email: String!, $password: String!) {
     }
   }
 }
-mutation UpdateUser($id: uuid!, $activeTimesheetId: uuid) {
-  update_users_by_pk(
-    pk_columns: { id: $id }
-    _set: { activeTimesheetId: $activeTimesheetId }
-  ) {
+
+mutation UpdateUser($id: String!, $active_timesheet_id: String) {
+  update_users_by_pk(pk_columns: { id: $id }, _set: { active_timesheet_id: $active_timesheet_id }) {
     id
-    activeTimesheetId
+    active_timesheet_id
   }
 }
 
-mutation DeleteUserById($id: uuid!) {
+mutation SetLastSeen($id: String!, $time: timestamptz) {
+  update_users_by_pk(pk_columns: { id: $id }, _set: { last_seen: $time }) {
+    id
+    active_timesheet_id
+  }
+}
+
+mutation DeleteUserById($id: String!) {
   delete_users(where: { id: { _eq: $id } }) {
     affected_rows
     returning {
@@ -35,33 +35,33 @@ mutation DeleteUserById($id: uuid!) {
   }
 }
 
-
-mutation CreateTimesheet($userId: uuid!) {
-  insert_timesheets(objects: { userId: $userId }) {
+mutation CreateTimesheet($users_id: String!) {
+  insert_timesheets(objects: { users_id: $users_id }) {
     affected_rows
     returning {
-      user {
-        id
-        email
-      }
+      # user {
+      #   id
+      #   email
+      # }
       start
       id
     }
   }
 }
 
-mutation UpdateTimesheet($id: uuid!, $end: timestamptz, $start: timestamptz) {
+mutation UpdateTimesheet($id: String!, $end: timestamptz, $start: timestamptz) {
   update_timesheets_by_pk(pk_columns: { id: $id }, _set: { end: $end }) {
-    user {
-      id
-      email
-    }
+    # user {
+    #   id
+    #   email
+    # }
     start
     end
     id
   }
 }
-# mutation UpdateTimesheet($id: uuid!, $end: timestamptz, $start: timestamptz) {
+
+# mutation UpdateTimesheet($id: String!, $end: timestamptz, $start: timestamptz) {
 #   update_timesheets(
 #     where: { id: { _eq: $id } }
 #     _set: { end: $end, start: $start }
@@ -80,17 +80,47 @@ mutation UpdateTimesheet($id: uuid!, $end: timestamptz, $start: timestamptz) {
 #     }
 #   }
 # }
-mutation DeleteTimesheetById($id: uuid!) {
+mutation DeleteTimesheetById($id: String!) {
   delete_timesheets(where: { id: { _eq: $id } }) {
     affected_rows
     returning {
       id
       created_at
       updated_at
-      user {
-        id
-        email
-      }
+      # user {
+      #   id
+      #   email
+      # }
+    }
+  }
+}
+
+mutation CreateAccount($account_name: String!) {
+  insert_accounts(objects: { account_name: $account_name }) {
+    affected_rows
+    returning {
+      id
+      account_name
+      created_at
+    }
+  }
+}
+
+mutation UpdateAccount($id: numeric!, $account_name: String) {
+  update_accounts_by_pk(pk_columns: { id: $id }, _set: { account_name: $account_name }) {
+    id
+    account_name
+  }
+}
+
+mutation DeleteAccountById($id: numeric!) {
+  delete_accounts(where: { id: { _eq: $id } }) {
+    affected_rows
+    returning {
+      account_name
+      created_at
+      updated_at
+      id
     }
   }
 }

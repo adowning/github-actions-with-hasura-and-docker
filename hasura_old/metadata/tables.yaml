@@ -1,0 +1,70 @@
+---
+    version: 2
+    tables:
+    - table:
+        schema: public
+        name: account
+    - table:
+        schema: public
+        name: accountTest
+      array_relationships:
+      - name: orderTestsByAccountTestId
+        using:
+          foreign_key_constraint_on:
+            column: accountTest_id
+            table:
+              schema: public
+              name: orderTest
+    - table:
+        schema: public
+        name: calls
+    - table:
+        schema: public
+        name: employee
+    - table:
+        schema: public
+        name: jobs
+    - table:
+        schema: public
+        name: lineitem
+      object_relationships:
+      - name: order
+        using:
+          foreign_key_constraint_on: order_id
+    - table:
+        schema: public
+        name: order
+      array_relationships:
+      - name: lineitems
+        using:
+          foreign_key_constraint_on:
+            column: order_id
+            table:
+              schema: public
+              name: lineitem
+    - table:
+        schema: public
+        name: orderTest
+      object_relationships:
+      - name: accountTestByAccountTestId
+        using:
+          foreign_key_constraint_on: accountTest_id
+    - table:
+        schema: public
+        name: orderitem
+    - table:
+        schema: public
+        name: route
+    - table:
+        schema: public
+        name: scheduleitem
+    - table:
+        schema: public
+        name: site
+    - table:
+        schema: public
+        name: timesheet
+    - table:
+        schema: public
+        name: users
+    

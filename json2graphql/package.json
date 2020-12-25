@@ -1,0 +1,60 @@
+{
+  "name": "json2graphql",
+  "description": "A CLI tool to import JSON data in Hasura GraphQL Engine",
+  "version": "0.1.5",
+  "author": "Hasura",
+  "bin": {
+    "json2graphql": "./bin/run",
+    "j2g": "./bin/run"
+  },
+  "bugs": "https://github.com/hasura/json2graphql/issues",
+  "dependencies": {
+    "@oclif/command": "1.4.35",
+    "@oclif/config": "1.6.33",
+    "@oclif/errors": "1.1.2",
+    "@oclif/plugin-help": "2.0.5",
+    "bluebird": "^3.7.2",
+    "change-case": "^4.1.2",
+    "cli-ux": "4.7.3",
+    "graphqurl": "^0.3.3",
+    "moment": "2.22.2",
+    "node-fetch": "2.2.0",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "eslint": "4.19.1",
+    "eslint-config-oclif": "1.5.1"
+  },
+  "engines": {
+    "node": ">=8.0.0"
+  },
+  "files": [
+    "/bin",
+    "/src"
+  ],
+  "homepage": "https://github.com/hasura/json2graphql",
+  "keywords": [
+    "oclif",
+    "cli",
+    "graphql",
+    "grapql-engine",
+    "json",
+    "mock"
+  ],
+  "license": "MIT",
+  "main": "src/command.js",
+  "oclif": {
+    "bin": "json2graphql"
+  },
+  "repository": "hasura/json2graphql",
+  "scripts": {
+    "eslint": "eslint .",
+    "eslintfix": "eslint . --fix",
+    "posttest": "npm run eslint",
+    "test": "cd test && ./test.sh",
+    "start": "node bin/run http://localhost:8083/ --db='converter.js' --overwrite"
+  },
+  "pre-commit": [
+    "eslintfix"
+  ]
+}
